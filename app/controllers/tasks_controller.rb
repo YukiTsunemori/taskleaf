@@ -28,9 +28,14 @@ class TasksController < ApplicationController
   end
 
   def create
-    task = Task.new(task_params)
-    task.save!
-    redirect_to tasks_url, notice: "タスク「#{task.name}」を登録しました"
+    @task = Task.new(task_params)
+    # @taskユーザとすることでif節が失敗した時にレンダリングされるnewのフォームに前回の入力データが引き継がれる
+    if @task.save
+      redirect_to @task, notice: "タスク「#{@task.name}」を登録しました"
+      
+    else
+      render :new
+    end
   end
 
   private
