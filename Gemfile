@@ -21,7 +21,7 @@ gem "slim-rails"
 # Slimのジェネレータを提供する
 gem "html2slim", github: "slim-template/html2slim"
 # ERB形式のファイルをslim形式に変換してくれるコマンド、erb2slimを提供するgem
-gem "bootstrap"
+# gem "bootstrap"
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem "bcrypt", "~> 3.1.7"
 
