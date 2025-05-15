@@ -1,4 +1,4 @@
-class TalksController < ApplicationController
+class TasksController < ApplicationController
   def index
   end
 
