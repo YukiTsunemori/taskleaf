@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   private
+    # controller内に定義するpublicなメソッドはルーティングが通っていればアクションとして呼び出される可能性がある。
+    # データー取得のためのユーティリティメソッドはprivateにすべきである。
     def current_user
       @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
     end
