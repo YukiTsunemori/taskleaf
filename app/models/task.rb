@@ -3,9 +3,16 @@ class Task < ApplicationRecord
   validate :validate_name_not_including_comma
   # 自分で定義したメソッドは、validate :メソッド名、(sは不要)とする。
   belongs_to :user
+
+  scope :recent, -> { order(created_at: :desc) }
+  # recentというスコープは、次のような使い方ができる。
+  # tasks = Task.recent => 全件を新しい順に取得
+  # task = Task.recent.first => 最も新しいタスクのオブジェクトを取得
+  # Task.recentでActive::Relationオブジェクトを返すだけでクエリはまだ発行されない。
+  # Railsのクエリ実行部分、つまりfirstを呼び出してそれがRelationオブジェクト（設計図のようなもの）
+  # を呼び出すことでクエリが発行される。これはActicveRecordの遅延評価によるもの。
   private
     def validate_name_not_including_comma
         errors.add(:name, "にカンマを含めることはできません") if name&.include?(",")
     end
-
 end
