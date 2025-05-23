@@ -5,4 +5,5 @@ class User < ApplicationRecord
   # 2つはpassword_confirmation属性。1つ目のpasswordと一致しなければ検証に失敗する。これも一時的。
   validates :name,  presence: true
   validates :email, presence: true, uniqueness: true
+  has_many :tasks
 end
