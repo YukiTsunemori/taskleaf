@@ -1,4 +1,4 @@
-FactoryBot.define do
+FactoryBot.define do # fixtureの代替ライブラリ
   factory :task do
     name { "テストを書く" }
     description { "Rspec&Capybara&FactoryBotを準備する" }
