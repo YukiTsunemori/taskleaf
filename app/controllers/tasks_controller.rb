@@ -31,7 +31,7 @@ class TasksController < ApplicationController
     @task.user = current_user
     # @taskとすることでif節が失敗した時にレンダリングされるnewのフォームに前回の入力データが引き継がれる
     if @task.save
-      redirect_to @task
+      redirect_to @task, notice: "タスク「#{@task.name}」を登録しました"
     else
       render :new, status: :unprocessable_entity
     end

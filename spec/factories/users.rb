@@ -1,8 +1,9 @@
 FactoryBot.define do
   factory :user do
     name { "テストユーザー" }
-    email { "test1@email.com" }
+    sequence(:email) { |n| "test#{n}@email.com" }  # ←ここを変更
     password { "password" }
+    password_confirmation { "password" }
   end
 
   # factoryメソッドを利用して、:userという名前のUserクラスのファクトリをを定義する。

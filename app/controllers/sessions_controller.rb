@@ -6,9 +6,9 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: session_params[:email])
 
-    if user && user.authenticate(session_params[:password])
+    if user&.authenticate(session_params[:password])
       session[:user_id] = user.id
-      redirect_to root_url
+      redirect_to tasks_path, notice: "ログインに成功しました"
     else
       render :new, status: :unprocessable_entity
     end

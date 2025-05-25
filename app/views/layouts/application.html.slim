@@ -29,8 +29,17 @@ html
         - else 
           li.nav-item= link_to "ログイン", login_path, class: "nav-link"
     .container
-      - if flash.notice.present?
-        .alert.alert-success= flash.notice 
+      - flash.each do |key, message|
+        - case key.to_sym
+        - when :notice
+          .alert.alert-info= message
+        - when :alert
+          .alert.alert-danger= message
+        - when :success
+          .alert.alert-success= message
+        - else
+          .alert.alert-secondary= message
+ 
       = yield
       div 
       = debug(params) if Rails.env.development?
