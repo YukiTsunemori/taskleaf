@@ -33,7 +33,8 @@ RSpec.describe "タスク管理機能", type: :system do
         expect(page).to have_no_content "最初のタスク"
       end
     end
-    
+  end
+
     describe "詳細表示機能" do
       context "ユーザーAがログインしている時" do
         let(:login_user) { user_a }
@@ -47,5 +48,4 @@ RSpec.describe "タスク管理機能", type: :system do
         end
       end
     end
-  end
 end
