@@ -22,7 +22,8 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    task.destroy
+    binding.irb
+    @task.destroy
     redirect_to tasks_url, notice: "タスクを削除しました"
   end
 
@@ -31,6 +32,7 @@ class TasksController < ApplicationController
     @task.user = current_user
     # @taskとすることでif節が失敗した時にレンダリングされるnewのフォームに前回の入力データが引き継がれる
     if @task.save
+      logger.debug "task: #{@task.attributes.inspect}"
       redirect_to @task, notice: "タスク「#{@task.name}」を登録しました"
     else
       render :new, status: :unprocessable_entity

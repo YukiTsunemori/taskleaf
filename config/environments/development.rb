@@ -6,11 +6,15 @@ Rails.application.configure do
   # Make code changes take effect immediately without server restart.
   config.enable_reloading = true
 
+  config.log_level = :debug
+
   # Do not eager load code on boot.
   config.eager_load = false
 
   # Show full error reports.
   config.consider_all_requests_local = true
+  # 本番環境で出る例外の画面を開発環境でも表示させることができる => falseに設定
+  # trueの場合はデバック用が表示される
 
   # Enable server timing.
   config.server_timing = true
