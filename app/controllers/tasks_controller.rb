@@ -3,7 +3,9 @@ class TasksController < ApplicationController
   # current_userのタスク一覧を表示するメソッドはprivateないで定義し、各アクションが呼び出される前に
   # 実行する
   def index
-    @tasks = current_user.tasks.order(created_at: :desc)
+    # gemfileのransackを追加したことにより。検索を行うためのransackメソッドが追加される。
+    @q = current_user.tasks.ransack(params[:q])
+    @tasks = @q.result(distinct: true).recent
   end
 
   def show
@@ -17,8 +19,8 @@ class TasksController < ApplicationController
   end
 
   def update
-    task.update!(task_params)
-    redirect_to tasks_url, notice: "タスク「#{task.name}」を更新しました"
+    @task.update!(task_params)
+    redirect_to tasks_url, notice: "タスク「#{@task.name}」を更新しました"
   end
 
   def destroy
@@ -28,11 +30,14 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
-    @task.user = current_user
+   @task = current_user.tasks.new(task_params)
+    if params[:back].present?
+      render :new
+      return # このreturnは、if節が成功した場合にnewのフォームを再表示するために必要。
+    end
+
     # @taskとすることでif節が失敗した時にレンダリングされるnewのフォームに前回の入力データが引き継がれる
     if @task.save
-      logger.debug "task: #{@task.attributes.inspect}"
       redirect_to @task, notice: "タスク「#{@task.name}」を登録しました"
     else
       render :new, status: :unprocessable_entity

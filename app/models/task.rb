@@ -11,6 +11,11 @@ class Task < ApplicationRecord
   # Task.recentでActive::Relationオブジェクトを返すだけでクエリはまだ発行されない。
   # Railsのクエリ実行部分、つまりfirstを呼び出してそれがRelationオブジェクト（設計図のようなもの）
   # を呼び出すことでクエリが発行される。これはActicveRecordの遅延評価によるもの。
+
+  def self.ransackable_attributes(auth_object = nil)
+    [ "created_at", "description", "id", "id_value", "name", "user_id" ]
+  end
+
   private
     def validate_name_not_including_comma
         errors.add(:name, "にカンマを含めることはできません") if name&.include?(",")

@@ -1,4 +1,14 @@
 GIT
+  remote: https://github.com/activerecord-hackery/ransack.git
+  revision: e06a27ded233166362fdd9e6ca3996cecbef8265
+  branch: main
+  specs:
+    ransack (4.3.0)
+      activerecord (>= 7.1)
+      activesupport (>= 7.1)
+      i18n
+
+GIT
   remote: https://github.com/slim-template/html2slim.git
   revision: e92e6bb80570dce0c413a6ff01b858754845df24
   specs:
@@ -457,6 +467,7 @@ DEPENDENCIES
   rails (~> 8.0.2)
   rails-i18n
   rails_autolink
+  ransack!
   rspec-rails (~> 6.0)
   rubocop-rails-omakase
   sassc-rails
