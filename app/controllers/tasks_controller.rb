@@ -39,6 +39,15 @@ class TasksController < ApplicationController
     end
   end
 
+  def confirm_new
+    @task = current_user.tasks.new(task_params)
+    render :new unless @task.valid?
+    # @task.valid?は、@taskのバリデーションを実行し、エラーがあればfalseを返す。
+    # そのため、エラーがあればnewのフォームを再表示する。
+    # @task.valid?がtrueならば、confirm_newのビューを表示する。
+    # confirm_newのビューは、タスク登録の確認画面となる。
+  end
+
   private
     def task_params
       params.require(:task).permit(:name, :description)
