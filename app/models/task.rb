@@ -1,4 +1,6 @@
 class Task < ApplicationRecord
+  has_one_attached :image
+  # has_one_attachedは、ActiveStorageを利用して画像を1つだけ添付できるようにする。
   validates :name, presence: true, length: { maximum: 30 }
   validate :validate_name_not_including_comma
   # 自分で定義したメソッドは、validate :メソッド名、(sは不要)とする。
