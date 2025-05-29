@@ -23,7 +23,7 @@ gem "slim-rails"
 # Slimのジェネレータを提供する
 gem "html2slim", github: "slim-template/html2slim"
 # ERB形式のファイルをslim形式に変換してくれるコマンド、erb2slimを提供するgem
-gem 'ransack', :github => 'activerecord-hackery/ransack', :branch => 'main' # Ransackは、Railsの検索機能を簡単に実装できるgem
+gem "ransack", github: "activerecord-hackery/ransack", branch: "main" # Ransackは、Railsの検索機能を簡単に実装できるgem
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem "bcrypt", "~> 3.1.7"
