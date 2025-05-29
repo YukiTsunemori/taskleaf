@@ -16,6 +16,11 @@ class Task < ApplicationRecord
     [ "created_at", "description", "id", "id_value", "name", "user_id" ]
   end
 
+  def self.ransackable_associations(auth_object = nil)
+    # ransackable_associationsは、検索に利用して良いカラムの範囲を制限できる
+    []
+  end
+
   private
     def validate_name_not_including_comma
         errors.add(:name, "にカンマを含めることはできません") if name&.include?(",")
