@@ -119,6 +119,7 @@ GEM
     crass (1.0.6)
     cssbundling-rails (1.4.3)
       railties (>= 6.0.0)
+    csv (3.3.4)
     date (3.4.1)
     debug (1.10.0)
       irb (~> 1.10)
@@ -453,6 +454,7 @@ DEPENDENCIES
   brakeman
   capybara
   cssbundling-rails (~> 1.4)
+  csv
   debug
   factory_bot_rails (~> 6.2)
   fuubar

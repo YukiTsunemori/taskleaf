@@ -6,9 +6,9 @@ class Task < ApplicationRecord
   end
 
   def self.generate_csv(tasks)
-    CSV.generate(headers: true) do |csv| #
+    ::CSV.generate(headers: true) do |csv|
       csv << csv_attributes # ヘッダー行を追加
-      all.each do |task| # 全件を1件ずつ処理
+      tasks.each do |task| # 全件を1件ずつ処理
         csv << csv_attributes.map { |attr| task.send(attr) } # 各タスクの属性値をCSV行として追加
       end
     end
