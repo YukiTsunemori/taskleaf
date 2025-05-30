@@ -1,4 +1,19 @@
 class Task < ApplicationRecord
+  def self.csv_attributes
+    # CSV出力時に必要なカラムを指定する。
+    # ここでは、4つのカラムをCSVに出力する。
+    [ "name", "description", "created_at", "updated_at" ]
+  end
+
+  def self.generate_csv(tasks)
+    CSV.generate(headers: true) do |csv| #
+      csv << csv_attributes # ヘッダー行を追加
+      all.each do |task| # 全件を1件ずつ処理
+        csv << csv_attributes.map { |attr| task.send(attr) } # 各タスクの属性値をCSV行として追加
+      end
+    end
+  end
+
   has_one_attached :image
   # has_one_attachedは、ActiveStorageを利用して画像を1つだけ添付できるようにする。
   validates :name, presence: true, length: { maximum: 30 }
@@ -22,6 +37,7 @@ class Task < ApplicationRecord
     # ransackable_associationsは、検索に利用して良いカラムの範囲を制限できる
     []
   end
+
 
   private
     def validate_name_not_including_comma

@@ -1,5 +1,5 @@
 require_relative "boot"
-# require "csv"
+require "csv"
 require "rails/all"
 
 Bundler.require(*Rails.groups)

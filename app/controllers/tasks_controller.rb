@@ -6,13 +6,20 @@ class TasksController < ApplicationController
     # gemfileのransackを追加したことにより。検索を行うためのransackメソッドが追加される。
     @q = current_user.tasks.ransack(params[:q])
     @tasks = @q.result(distinct: true)
-
-
     # @tasks = @q.result(distinct: true).recent
     # @q.resultは、ransackによる検索結果を返す。
     # distinct: trueは、重複するレコードを除外するオプション。
     # @q.resultはActiveRecord::Relationオブジェクトを返すので、さらにメソッドをチェーンして
     # recentスコープを適用することで、最新のタスクから順に取得できる。
+
+    respond_to do |format| # format.htmlはHTMLとしてアクセスされた場合、format.csvはCSVとしてアクセスされた場合にそれぞれ実行される。
+      format.html
+      format.csv { send_data Task.generate_csv(@tasks), filename: "tasks-#{Time.zone.now.strftime('%Y%m%d%H%M%S')}.csv" }
+      # format.csvは、CSV形式でのレスポンスを処理する。
+      # send_dataメソッドは、CSVデータをダウンロードさせるために使用される。
+      # @tasks.generate_csvは、Taskモデルに定義されたgenerate_csvメソッドを呼び出してCSVデータを生成する。
+      # filenameオプションは、ダウンロードされるファイルの名前を指定する。
+    end
   end
 
   def show
