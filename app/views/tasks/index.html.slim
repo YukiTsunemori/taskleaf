@@ -35,5 +35,8 @@ table.table.table-hover
 = link_to "エクスポート", tasks_path(format: :csv), class: "btn btn-primary mb-3"
 -# URLを生成する際にformat: :csvという指定をすることで、/tasks.csvというURLが生成される。
 -# そのURLにアクセスすると、CSV形式でデータがダウンロードされる。
+= form_tag import_tasks_path, multipart: true, class: "mb-3" do
+    = file_field_tag :file
+    = submit_tag "インポート", class: "btn btn-primary"
 
 

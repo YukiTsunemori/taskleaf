@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   resources :tasks do
     post :confirm, action: :confirm_new, on: :new
+    post :import, on: :collection
   end
   # 上記のように、resources :tasks do ... endの中で、post :confirmとすることで、
   # タスクの新規登録の確認画面を表示するためのルーティングを追加できる。

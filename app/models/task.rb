@@ -14,6 +14,17 @@ class Task < ApplicationRecord
     end
   end
 
+  def self.import(file) # fileという名前の引数でアップされたファイルの内容にアクセスするためのオブジェクトを受け取る
+    CSV.foreach(file.path, headers: true) do |row|
+      # CSV.foreachでファイルを1行ずつ読み込みます。headers: trueの指定で1行目のヘッダを無視する。
+      task = new # 新しいTaskオブジェクトを生成 Task.new同じ。
+      task.attributes = row.to_hash.slice(*csv_attributes)
+      # row.to_hashでCSVの1行をハッシュに変換し、sliceメソッドでcsv_attributesに指定したカラムだけを抽出する。
+      # これにより、CSVのヘッダと同じ名前のカラムだけがTaskオブジェクトに設定される。
+      task.save!
+    end
+  end
+
   has_one_attached :image
   # has_one_attachedは、ActiveStorageを利用して画像を1つだけ添付できるようにする。
   validates :name, presence: true, length: { maximum: 30 }

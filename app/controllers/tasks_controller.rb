@@ -70,6 +70,11 @@ class TasksController < ApplicationController
     # confirm_newのビューは、タスク登録の確認画面となる。
   end
 
+  def import
+    current_user.tasks.import(params[:file])
+    redirect_to tasks_url, notice: "タスクをインポートしました"
+  end
+
   private
     def task_params
       params.require(:task).permit(:name, :description, :image)
