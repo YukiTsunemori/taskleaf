@@ -53,6 +53,7 @@ class TasksController < ApplicationController
     # @taskとすることでif節が失敗した時にレンダリングされるnewのフォームに前回の入力データが引き継がれる
     if @task.save
       TaskMailer.creation_email(@task).deliver_now
+       SampleJob.perform_later
       # タスクが作成されたときにメールを送信する。
       # deliver_nowメソッドは、メールを即時に送信することを意味する。
       redirect_to @task, notice: "タスク「#{@task.name}」を登録しました"
