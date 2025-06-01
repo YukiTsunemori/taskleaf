@@ -5,7 +5,7 @@ class TasksController < ApplicationController
   def index
     # gemfileのransackを追加したことにより。検索を行うためのransackメソッドが追加される。
     @q = current_user.tasks.ransack(params[:q])
-    @tasks = @q.result(distinct: true)
+    @tasks = @q.result(distinct: true).page(params[:page]) # 一覧表示の際にpageというscopeを適用してページネーションを行う。
     # @tasks = @q.result(distinct: true).recent
     # @q.resultは、ransackによる検索結果を返す。
     # distinct: trueは、重複するレコードを除外するオプション。
