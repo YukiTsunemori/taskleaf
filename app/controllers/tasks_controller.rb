@@ -38,9 +38,12 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    binding.irb
+    # binding.irb
     @task.destroy
-    redirect_to tasks_url, notice: "タスクを削除しました"
+    head :no_content
+    # head :no_contentは、HTTPステータスコード204を返す。
+    # これは、リクエストが成功したが、レスポンスボディがないことを示す。
+    # タスクの削除が成功した場合、何も表示しない。
   end
 
   def create
