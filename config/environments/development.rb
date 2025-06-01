@@ -78,4 +78,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = { address: "localhost", port: 1025 }
   # delivery_methodを: smtpに設定することで、メールの送信方法をSMTPに変更する。
   # smtp_settingsでSMTPサーバーのアドレスとポートを指定する。
+
+  config.active_job.queue_adapter = :sidekiq
+  # Active JobのキューアダプターをSidekiqに設定する。
 end
