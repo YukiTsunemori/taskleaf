@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/activerecord-hackery/ransack.git
-  revision: e06a27ded233166362fdd9e6ca3996cecbef8265
+  revision: f0272e8c2b2c4bc5c0935eb7f47f944c54a64275
   branch: main
   specs:
     ransack (4.3.0)
@@ -113,7 +113,7 @@ GEM
     bcrypt (3.1.20)
     bcrypt_pbkdf (1.1.1)
     benchmark (0.4.1)
-    bigdecimal (3.2.1)
+    bigdecimal (3.2.2)
     bindex (0.8.1)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
